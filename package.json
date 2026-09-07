@@ -2,13 +2,20 @@
   "name": "pi-orchestrate",
   "version": "0.1.0",
   "description": "Scout / Main Worker / Smart Worker orchestration for Pi: ranked backends, retry policy, and an agy reference leg. Tested, with evidence.",
-  "author": "selftwo",
+  "author": "Benison Joseph <reach.benison@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/selftwo/pi-orchestrate.git"
   },
-  "keywords": ["pi-package", "pi", "orchestration", "subagents", "scout", "advisor"],
+  "keywords": [
+    "pi-package",
+    "pi",
+    "orchestration",
+    "subagents",
+    "scout",
+    "advisor"
+  ],
   "pi": {
     "skills": [
       "skills/orchestrate/SKILL.md"
