@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "scout": {
+    "profile": "scout",
+    "ranking": [
+      {"model": "opencode-go/glm-5.3-flash", "thinking": "low"},
+      {"model": "opencode-go/deepseek-v4-flash", "thinking": "low"},
+      {"model": "openai-codex/gpt-5.6-luna", "thinking": "high"},
+      {"model": "opencode-go/qwen3.8-flash", "thinking": "low"},
+      {"model": "agy/headless", "thinking": "low-effort", "via": "herdr"}
+    ]
+  },
+  "advisor": {
+    "profile": "smart-worker",
+    "ranking": [
+      {"model": "openai-codex/gpt-6-astra", "thinking": "low"},
+      {"model": "opencode-go/kimi-k3", "thinking": "medium"},
+      {"model": "opencode-go/glm-5.3-flash", "thinking": "high"},
+      {"model": "opencode-go/deepseek-v4-flash", "thinking": "max"},
+      {"model": "opencode-go/muse-spark-1.3-contributor", "thinking": "xhigh"}
+    ]
+  },
+  "thinkingRule": "Scoped per-model level from pi settings modelThinkingLevels wins when the call passes none; role calls pass their tier explicitly, which overrides. Unscoped models fall back to high.",
+  "retry": {
+    "on": ["429", "timeout", "network-error", "empty-output"],
+    "action": "next-rank",
+    "logAttempts": true,
+    "onExhaustion": "main-worker-decides-with-note"
+  },
+  "reference": {
+    "backend": "agy",
+    "via": "herdr",
+    "when": "every-v1-run",
+    "contextPack": "task-packet-plus-cited-files",
+    "outputDir": ".harness/runs/<id>/ref/",
+    "gates": false
+  },
+  "ledger": ".harness/runs/<id>/{task.md,scout/,plan.md,diff.patch,advisor.json,tests.log,decision.md,ref/}",
+  "budgets": {"scout": "120s", "advisorRoutine": "90s", "advisorDeep": "180s"}
+}
